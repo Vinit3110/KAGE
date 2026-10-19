@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAGE – Cybersecurity Dojo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-950:#080B10;--ink-900:#0D1219;--line:rgba(220,230,240,.14);
+  --text:#F2EEE7;--text-2:#B8BDC5;--text-3:#7F8995;
+  --red-500:#F23845;--red-600:#D92736;--red-glow:rgba(242,56,69,.22);--red-deep:#741B2A;
+  --serif:"Cormorant Garamond","Playfair Display",Georgia,serif;
+  --sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --jp:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
+  --mono:ui-monospace,"IBM Plex Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--ink-950);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
+#scene,#fx{position:absolute;inset:0;width:100%;height:100%;display:block}
+#scene{z-index:-3}
+#fx{z-index:-2;pointer-events:none}
+.scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+   linear-gradient(90deg,rgba(8,3,8,.9) 0,rgba(8,3,8,.58) 30%,rgba(8,3,8,0) 62%),
+   linear-gradient(0deg,rgba(8,3,8,.9) 0,rgba(8,3,8,0) 24%),
+   linear-gradient(180deg,rgba(8,3,8,.6),rgba(8,3,8,0) 18%)}
+.scrim::after{content:"";position:absolute;inset:0;opacity:.14;mix-blend-mode:overlay;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* header */
+.top{display:flex;align-items:center;gap:clamp(1rem,4vw,4rem);padding:28px clamp(20px,5.5vw,90px)}
+.brand{display:flex;align-items:center;gap:1.4rem}
+.mark{font:500 2.5rem/1 var(--jp);color:var(--red-500);text-shadow:0 0 22px var(--red-glow)}
+.word{font:500 1.35rem/1 var(--serif);letter-spacing:.55em;color:var(--text)}
+nav{display:flex;gap:clamp(1.2rem,3vw,3rem);margin-left:clamp(0rem,4vw,5rem)}
+nav a{font:500 .92rem var(--sans);color:var(--text-2);padding:.4rem 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+nav a:hover{color:var(--text);border-color:var(--red-500)}
+.tools{margin-left:auto;display:flex;align-items:center;gap:1.4rem}
+.icon{background:none;border:0;color:var(--text);cursor:pointer;display:grid;place-items:center;width:40px;height:40px}
+.icon svg{width:22px;height:22px}
+.vr{width:1px;height:42px;background:var(--line)}
+
+.btn{display:inline-flex;align-items:center;gap:.8rem;padding:1rem 1.7rem;border:1px solid var(--line);border-radius:3px;
+  font:600 .8rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--text);
+  background:rgba(8,11,16,.55);backdrop-filter:blur(6px);transition:background .2s,color .2s,border-color .2s}
+.btn:hover{border-color:var(--text-2)}
+.btn.red{border-color:var(--red-500);color:var(--red-500);background:rgba(242,56,69,.1);box-shadow:inset 0 0 0 1px rgba(242,56,69,.15),0 0 28px var(--red-glow)}
+.btn.red:hover{background:var(--red-500);color:#fff}
+.btn svg{width:16px;height:16px}
+.top .btn{padding:.7rem 1.5rem}
+
+/* hero copy */
+.copy{flex:1;display:flex;flex-direction:column;justify-content:center;margin-left:clamp(20px,9vw,150px);max-width:min(700px,90vw);padding:2vh 0}
+.eyebrow{display:flex;align-items:center;gap:1rem;font:500 .78rem/1 var(--mono);letter-spacing:.22em;color:var(--red-500);margin-bottom:1.6rem}
+.eyebrow::after{content:"";width:min(150px,16vw);height:1px;background:rgba(242,56,69,.5)}
+h1{font:700 clamp(3.1rem,8.2vw,7.4rem)/.94 var(--serif);text-transform:uppercase;letter-spacing:-.005em}
+h1 span{display:block}
+h1 .mid{background:linear-gradient(180deg,#f2eee7 25%,#8c8f95);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .hot{color:var(--red-500);text-shadow:0 0 44px var(--red-glow)}
+.lede{font:500 clamp(1.15rem,1.9vw,1.5rem)/1.4 var(--serif);color:var(--text);margin:1.8rem 0 2.2rem;max-width:34em}
+.cta{display:flex;flex-wrap:wrap;gap:1rem}
+
+.side-l,.side-r{position:absolute;z-index:1;font-family:var(--jp);writing-mode:vertical-rl;pointer-events:none}
+.side-l{left:clamp(14px,3vw,48px);top:46%;display:flex;flex-direction:column;align-items:center;gap:.8rem;color:var(--text-2);font-size:1.5rem;letter-spacing:.2em}
+.side-l small{font:400 .6rem var(--sans);letter-spacing:.3em;color:var(--text-3);writing-mode:horizontal-tb;width:3.2em;text-align:center;line-height:1.6}
+.side-l i{width:1px;height:90px;background:var(--red-500);opacity:.7;display:block}
+.side-r{right:clamp(14px,3vw,48px);top:22vh;font-size:2.1rem;letter-spacing:.16em;color:rgba(242,238,231,.78);text-shadow:0 2px 18px rgba(0,0,0,.6)}
+
+.strip{list-style:none;display:flex;flex-wrap:wrap;gap:clamp(16px,3vw,48px);margin:0 clamp(20px,5.5vw,90px) 30px;padding-top:22px;border-top:1px solid rgba(242,56,69,.45)}
+.strip li{display:flex;align-items:center;gap:14px;color:var(--red-500)}
+.strip li+li{border-left:1px solid var(--line);padding-left:clamp(16px,3vw,48px)}
+.strip svg{width:34px;height:34px;flex:none}
+.strip strong{display:block;font:600 1.2rem/1.1 var(--serif);color:var(--text)}
+.strip span{font-size:.82rem;color:var(--text-2)}
+
+/* motion */
+.b{transform-box:fill-box;transform-origin:50% 100%;animation:gust 4s ease-in-out infinite}
+@keyframes gust{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(-9deg)}}
+.sw{animation:sw 5s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 50%}
+@keyframes sw{from{transform:translate(-3px,0) rotate(-2.2deg)}to{transform:translate(5px,2px) rotate(2.6deg)}}
+.drift{animation:drift 46s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translateX(-45px)}to{transform:translateX(45px)}}
+.birds{animation:fly 70s linear infinite}
+@keyframes fly{from{transform:translate(120px,10px)}to{transform:translate(-260px,-18px)}}
+.sh{animation:sh 3.2s ease-in-out infinite alternate}
+@keyframes sh{from{opacity:.15}to{opacity:.65}}
+.rise{opacity:0;transform:translateY(14px);animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i)*.12s + .15s)}
+@keyframes rise{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .b,.sw,.drift,.birds,.sh{animation:none}
+  .rise{animation:none;opacity:1;transform:none}
+}
+@media (max-width:880px){
+  nav,.side-l,.side-r{display:none}
+  .top{padding:20px}.copy{margin-left:20px}
+  .scrim{background:linear-gradient(180deg,rgba(8,3,8,.55),rgba(8,3,8,.7) 55%,rgba(8,3,8,.92))}
+  .strip{display:grid;grid-template-columns:1fr 1fr;gap:20px 12px}
+  .strip li+li{border:0;padding:0}
+}
+</style>
+</head>
+<body>
+<section class="hero">
+  <svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A lone ronin stands on a ridge facing a vast crimson sun over misty mountains, shrines and rivers.">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d0309"/><stop offset=".3" stop-color="#4a0b17"/><stop offset=".58" stop-color="#b5192a"/><stop offset=".8" stop-color="#ff4d3d"/><stop offset="1" stop-color="#ff7a55"/></linearGradient>
+      <radialGradient id="sun"><stop offset="0" stop-color="#ff7a5c"/><stop offset=".75" stop-color="#ff4a3d"/><stop offset="1" stop-color="#e02634"/></radialGradient>
+      <radialGradient id="glow"><stop offset="0" stop-color="#ff3b3b" stop-opacity=".55"/><stop offset="1" stop-color="#ff3b3b" stop-opacity="0"/></radialGradient>
+      <radialGradient id="cd"><stop offset="0" stop-color="#1a030b" stop-opacity=".95"/><stop offset="1" stop-color="#1a030b" stop-opacity="0"/></radialGradient>
+      <radialGradient id="cr"><stop offset="0" stop-color="#e0202f" stop-opacity=".9"/><stop offset="1" stop-color="#e0202f" stop-opacity="0"/></radialGradient>
+      <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5a4a" stop-opacity="0"/><stop offset=".5" stop-color="#ff5a4a" stop-opacity=".3"/><stop offset="1" stop-color="#ff5a4a" stop-opacity="0"/></linearGradient>
+      <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8283a"/><stop offset="1" stop-color="#2a0710"/></linearGradient>
+      <path id="lf" d="M0-10L3-4 9-6 6 0 10 4 3 4 0 11-3 4-10 4-6 0-9-6-3-4Z"/>
+    </defs>
+
+    <g class="lay" data-d="3">
+      <rect x="-80" y="0" width="1760" height="650" fill="url(#sky)"/>
+      <circle cx="1140" cy="385" r="540" fill="url(#glow)"/>
+      <circle cx="1140" cy="385" r="150" fill="url(#sun)"/>
+      <g fill="#a8182a" opacity=".55"><ellipse cx="1140" cy="338" rx="210" ry="5"/><ellipse cx="1140" cy="372" rx="190" ry="6"/><ellipse cx="1140" cy="410" rx="220" ry="5"/><ellipse cx="1140" cy="440" rx="170" ry="4"/></g>
+      <g class="drift">
+        <ellipse cx="200" cy="60" rx="430" ry="110" fill="url(#cd)"/><ellipse cx="720" cy="30" rx="520" ry="90" fill="url(#cd)"/>
+        <ellipse cx="1420" cy="70" rx="480" ry="130" fill="url(#cd)"/><ellipse cx="1260" cy="205" rx="300" ry="70" fill="url(#cd)"/>
+        <ellipse cx="300" cy="215" rx="300" ry="60" fill="url(#cr)"/><ellipse cx="520" cy="150" rx="380" ry="55" fill="url(#cr)"/>
+        <ellipse cx="1010" cy="140" rx="420" ry="50" fill="url(#cr)"/><ellipse cx="1380" cy="270" rx="260" ry="40" fill="url(#cr)"/>
+        <ellipse cx="800" cy="440" rx="400" ry="28" fill="url(#cr)"/><ellipse cx="1480" cy="445" rx="300" ry="26" fill="url(#cr)"/><ellipse cx="380" cy="480" rx="380" ry="30" fill="url(#cr)"/>
+      </g>
+      <g class="birds" fill="none" stroke="#1a0510" stroke-width="2" stroke-linecap="round">
+        <path d="M1010 250q8-8 16 0q8-8 16 0"/><path d="M1060 276q6-6 12 0q6-6 12 0"/><path d="M1260 226q7-7 14 0q7-7 14 0"/><path d="M1320 258q5-5 10 0q5-5 10 0"/><path d="M1180 210q6-6 12 0q6-6 12 0"/>
+      </g>
+    </g>
+
+    <g class="lay" data-d="5">
+      <path d="M-60 600V500L30 470 120 510 240 440 360 500 460 470 580 520 700 480 840 540 980 500 1140 460 1280 520 1420 480 1520 510 1660 490V600Z" fill="#7a2236" opacity=".85"/>
+      <path d="M860 610 960 548 1040 525 1100 475 1160 525 1260 548 1360 610Z" fill="#35091a"/>
+      <g id="pg"></g>
+      <path d="M-60 620 40 560 150 590 280 540 400 585 520 560 640 600 760 570 860 610Z" fill="#2c0a17"/>
+      <rect class="drift" x="-100" y="535" width="1800" height="90" fill="url(#mist)"/>
+    </g>
+
+    <g class="lay" data-d="9">
+      <path d="M-60 650V590Q150 560 300 595 480 625 640 590 820 560 980 600 1160 630 1330 590 1480 565 1660 595V650Z" fill="#1c0610"/>
+      <g id="t1" fill="#150409"></g>
+      <rect x="-80" y="618" width="1760" height="170" fill="url(#water)"/>
+      <g id="shm"></g>
+      <path d="M1480 520v100M1566 538v84" stroke="#ff8a7a" stroke-width="5" opacity=".35"/>
+      <rect class="drift" x="-100" y="640" width="1800" height="90" fill="url(#mist)" style="animation-duration:60s"/>
+    </g>
+
+    <g class="lay" data-d="13">
+      <path d="M880 722Q1100 668 1300 696 1450 716 1660 680V820H880Z" fill="#12040a"/>
+      <g id="t2" fill="#0e0307"></g>
+      <g id="pg2"></g>
+      <g stroke="#0e0307" stroke-linecap="square" fill="none"><path d="M1226 704v-44M1286 704v-44M1218 664h76" stroke-width="5"/><path d="M1230 676h52" stroke-width="3.5"/></g>
+    </g>
+
+    <g class="lay" data-d="18">
+      <path d="M-60 900V770Q180 735 380 765 560 790 700 770 780 745 850 752 960 760 1100 790 1350 835 1660 790V900Z" fill="#0a0306"/>
+      <path d="M-60 830 20 772 120 760 200 790 250 835 -60 870Z" fill="#070205" stroke="rgba(255,70,70,.28)"/>
+      <path d="M520 800 580 778 650 786 690 812Z" fill="#070205" stroke="rgba(255,70,70,.22)"/>
+    </g>
+
+    <g class="lay" data-d="14">
+      <g transform="translate(820 756)" fill="#07020a" stroke="rgba(255,80,70,.32)" stroke-width="1.2" stroke-linejoin="round">
+        <g id="cloth" stroke="none"></g>
+        <path d="M-28-34L-25 0H-7L-6-34ZM10-34L12 0H30L28-34Z"/>
+        <path d="M-34-296Q-44-250-52-180-60-110-64-34L-52-26-30-34-14-22 12-34 34-24 56-32Q62-110 52-180 44-250 34-296Q0-306-34-296Z"/>
+        <path d="M30-282Q64-232 42-168L28-174Q44-228 22-268Z"/>
+        <path d="M38-172 142-4 147-9 43-179Z" fill="#150409"/>
+        <path d="M41-176 145-6" stroke="#ffb0a0" stroke-width="1.4" opacity=".8"/>
+        <circle cx="0" cy="-306" r="15"/>
+        <path d="M-66-318 0-356 66-318Q0-304-66-318Z"/>
+      </g>
+    </g>
+
+    <g class="lay" data-d="26"><g id="grass"></g></g>
+
+    <g class="lay" data-d="30">
+      <g fill="none" stroke="#080207" stroke-linecap="round">
+        <path d="M-20 20C120 40 260 70 380 150 440 190 520 200 600 190" stroke-width="16"/>
+        <path d="M150 40C200-10 300-20 420 10" stroke-width="9"/>
+        <path d="M300 100C340 160 340 230 300 290" stroke-width="8"/>
+        <path d="M380 150C470 110 560 90 660 110" stroke-width="7"/>
+        <path d="M60 30C70 120 60 200 20 260" stroke-width="10"/>
+      </g>
+      <g id="leaves"></g>
+    </g>
+  </svg>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="scrim"></div>
+
+  <header class="top">
+    <a class="brand" href="#" aria-label="KAGE home"><span class="mark" aria-hidden="true">影</span><span class="word">KAGE</span></a>
+    <nav aria-label="Primary"><a href="#">Learn</a><a href="#">Practice</a><a href="#">Analyse</a><a href="#">Notes</a><a href="#">Leaderboard</a></nav>
+    <div class="tools">
+      <button class="icon" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+      <span class="vr" aria-hidden="true"></span>
+      <a class="btn red" href="#">Sign in</a>
+    </div>
+  </header>
+
+  <div class="side-l" aria-hidden="true"><i></i><span>影の道</span><small>THE SHADOW PATH</small></div>
+  <div class="side-r" aria-hidden="true">学び続ける</div>
+
+  <main class="copy">
+    <p class="eyebrow rise" style="--i:0">// CYBERSECURITY DOJO</p>
+    <h1 class="rise" style="--i:1"><span>Discipline</span><span class="mid">Secures</span><span class="hot">Freedom.</span></h1>
+    <p class="lede rise" style="--i:2">Learn. Practice. Analyse. Grow.<br>Master the skills to defend what matters.</p>
+    <div class="cta rise" style="--i:3">
+      <a class="btn red" href="#">Begin your journey <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      <a class="btn" href="#">Explore paths</a>
+    </div>
+  </main>
+
+  <ul class="strip">
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 8c8 2 18 2 26 0M6 12h20M9 8v20M23 8v20M5 28h6M21 28h6"/></svg><div><strong>3</strong><span>Core modules</span></div></li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="16" cy="16" r="12"/><circle cx="16" cy="16" r="6"/><circle cx="16" cy="16" r="1.5"/></svg><div><strong>Safe</strong><span>Practice labs</span></div></li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M16 3l11 6v14l-11 6-11-6V9zM5 9l11 6 11-6M16 15v14"/></svg><div><strong>Code</strong><span>Analysis tooling</span></div></li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 27V15M12 27V9M19 27V18M26 27V5"/></svg><div><strong>Track</strong><span>Your progress</span></div></li>
+  </ul>
+</section>
+
+<script>
+(()=>{
+const NS='http://www.w3.org/2000/svg',RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const $=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+const R=(a,b)=>a+Math.random()*(b-a), G=id=>document.getElementById(id);
+const scene=G('scene');
+
+/* terrain height for grass placement */
+const H=[[0,770],[190,745],[380,765],[560,780],[700,770],[780,752],[850,752],[960,765],[1100,790],[1350,822],[1600,790],[1700,790]];
+const hy=x=>{for(let i=1;i<H.length;i++)if(x<=H[i][0])return H[i-1][1]+(H[i][1]-H[i-1][1])*(x-H[i-1][0])/(H[i][0]-H[i-1][0]);return 790};
+
+/* grass: swaying blades, gust travels right to left */
+const gr=G('grass'),dark=['#10040a','#1b050c','#2a0710'],hot=['#8c1422','#d42434','#ff4a4a'];
+for(let i=0;i<340;i++){
+  const x=R(-60,1660),y=hy(x)+R(-8,110);
+  let h=R(30,115)*(y>820?1.2:1);
+  if(Math.abs(x-820)<90&&y<800)h*=.4;
+  const l=-R(6,38),r=Math.random();
+  const f=y>830?(r<.88?dark[i%3]:hot[0]):(r<.5?dark[i%3]:r<.75?'#3a0912':r<.93?hot[0]:r<.985?hot[1]:hot[2]);
+  $('path',{class:'b',fill:f,d:`M${x-2.2} ${y}Q${x-2+l*.25} ${y-h*.6} ${x+l} ${y-h}Q${x+2+l*.25} ${y-h*.55} ${x+2.2} ${y}Z`,
+    style:`animation-duration:${R(3.2,5.2).toFixed(2)}s;animation-delay:-${(x/1600*3+R(0,.6)).toFixed(2)}s`},gr);
+}
+
+/* pines along ridges */
+const pines=(id,x0,x1,y,n,a,b)=>{const g=G(id);for(let i=0;i<n;i++){const x=R(x0,x1),h=R(a,b),w=h*.28;$('path',{d:`M${x-w} ${y+R(-6,10)}L${x} ${y-h}L${x+w} ${y+10}Z`},g)}};
+pines('t1',-60,1660,610,120,14,34);
+pines('t2',900,1660,712,60,26,60);
+
+/* pagodas */
+const pagoda=(p,x,y,s)=>{const g=$('g',{transform:`translate(${x} ${y}) scale(${s})`,fill:'#12040a'},p);
+  [[0,34],[-34,26],[-68,18]].forEach(([d,w])=>{
+    $('path',{d:`M${-w-8} ${d}Q0 ${d-12} ${w+8} ${d}L${w} ${d-6}H${-w}Z`},g);
+    $('rect',{x:-w*.6,y:d-26,width:w*1.2,height:20},g);
+    $('rect',{x:-3,y:d-20,width:6,height:8,fill:'#ff5a3a',opacity:.8},g)});
+  $('rect',{x:-1.2,y:-112,width:2.4,height:30},g)};
+pagoda(G('pg'),1100,478,.7);
+pagoda(G('pg2'),1490,712,.62);
+
+/* sun reflection shimmer */
+for(let i=0;i<16;i++){const w=R(40,160);$('rect',{class:'sh',x:1140-w/2+R(-24,24),y:632+i*9,width:w,height:2,fill:'#ff9a78',
+  style:`animation-delay:-${R(0,3).toFixed(2)}s;animation-duration:${R(2.4,4.2).toFixed(2)}s`},G('shm'))}
+
+/* maple leaf clusters on the foreground branch */
+const lv=G('leaves'),pal=['#e0202e','#b3121f','#ff4b4b','#7a0c19','#c91a2a'];
+[[120,70],[250,100],[330,170],[430,185],[520,175],[600,190],[360,40],[240,20],[330,250],[620,110],[500,100],[40,200],[80,130],[700,120]].forEach(([cx,cy],k)=>{
+  const g=$('g',{class:'sw',style:`animation-duration:${R(3.6,6.4).toFixed(2)}s;animation-delay:-${R(0,5).toFixed(2)}s`},lv);
+  for(let i=0;i<15;i++)$('use',{href:'#lf',fill:pal[(Math.random()*pal.length)|0],
+    transform:`translate(${cx+R(-48,48)} ${cy+R(-34,34)}) rotate(${R(0,360)}) scale(${R(.9,2)})`},g)});
+
+/* wind-blown cloth (shape morph) */
+const cl=G('cloth'),cloth=[
+ ['M-34 -292C-90 -300 -140 -270 -200 -286C-150 -250 -100 -250 -50 -236Z','M-34 -292C-90 -270 -150 -300 -215 -262C-160 -236 -105 -262 -50 -236Z',3.1,0],
+ ['M-48 -220C-100 -215 -150 -190 -205 -200C-160 -165 -105 -170 -52 -160Z','M-48 -220C-100 -235 -150 -175 -212 -178C-165 -150 -108 -190 -52 -160Z',2.7,-.9],
+ ['M-56 -140C-100 -120 -140 -100 -190 -112C-150 -80 -100 -84 -60 -70Z','M-56 -140C-100 -150 -145 -80 -200 -90C-155 -60 -105 -100 -60 -70Z',3.6,-1.7],
+ ['M-50 -312C-90 -318 -120 -300 -160 -312L-158 -306C-120 -294 -90 -308 -50 -304Z','M-50 -312C-90 -300 -125 -325 -165 -300L-163 -294C-125 -318 -90 -296 -50 -304Z',2.2,-.6]];
+cloth.forEach(([a,b,d,s])=>{const p=$('path',{d:a},cl);
+  $('animate',{attributeName:'d',values:`${a};${b};${a}`,dur:d+'s',begin:s+'s',repeatCount:'indefinite',calcMode:'spline',keyTimes:'0;.5;1',keySplines:'.45 0 .55 1;.45 0 .55 1'},p)});
+
+/* falling leaves and petals */
+const cv=G('fx'),c=cv.getContext('2d'),maple=new Path2D('M0-10L3-4 9-6 6 0 10 4 3 4 0 11-3 4-10 4-6 0-9-6-3-4Z');
+const cols=['#ff3b46','#d4202e','#9c1224','#ff6b5a'];let W,Hh,P=[];
+const size=()=>{const d=Math.min(devicePixelRatio||1,2),b=cv.getBoundingClientRect();W=b.width;Hh=b.height;cv.width=W*d;cv.height=Hh*d;c.setTransform(d,0,0,d,0,0)};
+size();addEventListener('resize',size);
+for(let i=0;i<60;i++)P.push({x:R(0,W),y:R(0,Hh),s:R(3,8),r:R(0,6.28),vr:R(-1.6,1.6),vy:R(18,48),k:R(.6,1.4),ph:R(0,6.28),c:cols[i%4],a:R(.5,.95),p:Math.random()<.25});
+let t=0,last=performance.now();
+const draw=()=>{c.clearRect(0,0,W,Hh);P.forEach(p=>{c.save();c.translate(p.x,p.y);c.rotate(p.r);
+  c.scale(p.s/9,p.s/9*(Math.abs(Math.cos(p.ph+t*p.vr))*.85+.15));c.globalAlpha=p.a;c.fillStyle=p.c;
+  p.p?(c.beginPath(),c.ellipse(0,0,9,5,0,0,6.28),c.fill()):c.fill(maple);c.restore()})};
+const tick=n=>{const dt=Math.min((n-last)/1000,.05);last=n;t+=dt;
+  const w=70+Math.sin(t*.5)*40+Math.sin(t*1.3)*18;
+  P.forEach(p=>{p.x-=w*p.k*dt;p.y+=(p.vy+Math.sin(t*1.5+p.ph)*20)*dt;p.r+=p.vr*dt*(1+w/90);
+    if(p.x<-20){p.x=W+20;p.y=R(-20,Hh*.7)}if(p.y>Hh+20){p.y=-20;p.x=R(0,W+200)}});
+  draw();requestAnimationFrame(tick)};
+if(RM){scene.pauseAnimations();draw()}else requestAnimationFrame(tick);
+
+/* mouse parallax */
+if(!RM&&matchMedia('(pointer:fine)').matches){
+  const L=[...scene.querySelectorAll('.lay')];let tx=0,ty=0,x=0,y=0;
+  addEventListener('pointermove',e=>{tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5});
+  (function f(){x+=(tx-x)*.06;y+=(ty-y)*.06;L.forEach(g=>{const d=+g.dataset.d;g.style.transform=`translate(${-x*d}px,${-y*d*.5}px)`});requestAnimationFrame(f)})();
+}
+})();
+</script>
+</body>
+</html>

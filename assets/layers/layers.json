@@ -1,0 +1,296 @@
+{
+  "version": 1,
+  "desktop": {
+    "size": [
+      1586,
+      992
+    ],
+    "anchor": [
+      0.55,
+      0.55
+    ],
+    "overscan": 1.02,
+    "layers": [
+      {
+        "id": "valley",
+        "file": "assets/layers/runtime/valley.webp",
+        "rect": [
+          0,
+          0,
+          1586,
+          992
+        ],
+        "sourceCrop": [
+          0,
+          0,
+          1586,
+          992
+        ],
+        "textureSize": [
+          1586,
+          992
+        ],
+        "depth": 2,
+        "windAmount": 0,
+        "mask": "none",
+        "maskFile": null,
+        "bytes": 235976,
+        "textureBytes": 6293248
+      },
+      {
+        "id": "maple",
+        "file": "assets/layers/runtime/maple.webp",
+        "rect": [
+          0,
+          0,
+          732,
+          728
+        ],
+        "sourceCrop": [
+          0,
+          0,
+          732,
+          728
+        ],
+        "textureSize": [
+          732,
+          728
+        ],
+        "depth": 20,
+        "windAmount": 3.5,
+        "mask": "maple",
+        "maskFile": "assets/layers/masks/maple.svg",
+        "bytes": 163614,
+        "textureBytes": 2131584
+      },
+      {
+        "id": "ridge",
+        "file": "assets/layers/runtime/ridge.webp",
+        "rect": [
+          0,
+          650,
+          1586,
+          342
+        ],
+        "sourceCrop": [
+          0,
+          569,
+          1586,
+          992
+        ],
+        "textureSize": [
+          1586,
+          423
+        ],
+        "depth": 14,
+        "windAmount": 8,
+        "mask": "grass",
+        "maskFile": "assets/layers/masks/grass.svg",
+        "bytes": 196340,
+        "textureBytes": 2683512,
+        "restWarp": {
+          "centerX": 850,
+          "width": 410,
+          "lift": -75,
+          "falloff": 0.65
+        }
+      },
+      {
+        "id": "ronin",
+        "file": "assets/layers/runtime/ronin.webp",
+        "rect": [
+          616,
+          432,
+          412,
+          363
+        ],
+        "sourceCrop": [
+          419,
+          230,
+          1213,
+          935
+        ],
+        "textureSize": [
+          794,
+          705
+        ],
+        "depth": 14,
+        "windAmount": 17,
+        "mask": "cloth",
+        "maskFile": "assets/layers/masks/cloth.svg",
+        "bytes": 94754,
+        "textureBytes": 2239080
+      }
+    ]
+  },
+  "mobile": {
+    "size": [
+      941,
+      1672
+    ],
+    "anchor": [
+      0.65,
+      0
+    ],
+    "overscan": 1,
+    "layers": [
+      {
+        "id": "mobile-base",
+        "file": "assets/layers/runtime/mobile-base.webp",
+        "rect": [
+          0,
+          0,
+          941,
+          1672
+        ],
+        "sourceCrop": [
+          0,
+          0,
+          941,
+          1672
+        ],
+        "textureSize": [
+          941,
+          1672
+        ],
+        "depth": 0,
+        "windAmount": 0,
+        "mask": "none",
+        "maskFile": null,
+        "bytes": 284866,
+        "textureBytes": 6293408
+      },
+      {
+        "id": "mobile-ronin",
+        "file": "assets/layers/runtime/mobile-ronin.webp",
+        "rect": [
+          550,
+          565,
+          304,
+          290
+        ],
+        "sourceCrop": [
+          139,
+          459,
+          941,
+          1245
+        ],
+        "textureSize": [
+          802,
+          786
+        ],
+        "depth": 0,
+        "windAmount": 10,
+        "mask": "mobile-cloth",
+        "maskFile": "assets/layers/masks/mobile-cloth.svg",
+        "bytes": 137240,
+        "textureBytes": 2521488
+      }
+    ]
+  },
+  "limits": {
+    "desktopArtworkBytes": 2500000,
+    "mobileArtworkBytes": 1200000,
+    "textureBytes": 250000000,
+    "desktopDpr": 1.5,
+    "mobileDpr": 1.25,
+    "desktopFps": 60,
+    "mobileFps": 30
+  },
+  "maskDefinitions": {
+    "cloth": {
+      "kind": "cloth",
+      "anchorX": 810,
+      "reach": 185,
+      "top": 484,
+      "bottom": 765
+    },
+    "mobile-cloth": {
+      "kind": "cloth",
+      "anchorX": 704,
+      "reach": 158,
+      "top": 604,
+      "bottom": 839
+    },
+    "grass": {
+      "kind": "grass",
+      "roots": [
+        [
+          0,
+          718
+        ],
+        [
+          300,
+          744
+        ],
+        [
+          600,
+          795
+        ],
+        [
+          850,
+          826
+        ],
+        [
+          1100,
+          891
+        ],
+        [
+          1586,
+          998
+        ]
+      ],
+      "reach": 65
+    },
+    "maple": {
+      "kind": "maple",
+      "anchorX": 40,
+      "reach": 690,
+      "bottom": 345
+    }
+  },
+  "effects": {
+    "desktop": {
+      "sun": [
+        0.72,
+        0.35
+      ],
+      "river": [
+        0.79,
+        0.64
+      ],
+      "blade": [
+        [
+          0.574,
+          0.64
+        ],
+        [
+          0.645,
+          0.78
+        ]
+      ],
+      "fogY": 0.64
+    },
+    "mobile": {
+      "sun": [
+        0.82,
+        0.18
+      ],
+      "river": [
+        0.7,
+        0.37
+      ],
+      "blade": [
+        [
+          0.8,
+          0.43
+        ],
+        [
+          0.9,
+          0.51
+        ]
+      ],
+      "fogY": 0.42
+    }
+  }
+}

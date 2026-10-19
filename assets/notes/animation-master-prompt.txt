@@ -1,0 +1,5 @@
+Use case: precise-object-edit. Asset type: high-resolution production master of KAGE landing environment.
+Input image is the EDIT TARGET, the approved 1586x992 clean plate.
+Primary request: faithfully reconstruct this exact illustration at 3200x2000 pixels, keeping the original 16:10 composition and frame. This is a high-resolution artwork master, not a new composition. Preserve every subject's placement and scale, the sun centered at 72% width and 35% height, ronin at 53% width with feet at 79% height, foreground ridge, red-lit grass, top-left maple branch, distant pagodas, river and waterfalls. Maintain dark quiet left side for future HTML headings.
+Recover fine painterly detail on leaf edges, torn cloak, grass tips, trees and distant temples; preserve subtle gradients and deep blacks. No crunchy oversharpening. Match the existing crimson/near-black/purple palette, lighting, cinematic anime painting style and atmospheric depth.
+Do not add or remove subjects, alter the silhouette, brighten the left side, add typography or interface elements. No lettering, kanji, logos, watermarks or UI. Output one high-resolution 3200x2000 landscape illustration.

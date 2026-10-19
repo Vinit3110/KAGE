@@ -1,0 +1,39 @@
+# Keep application code, original briefs, handoff notes, tools, requirements,
+# fonts/licenses, reference images, and all source/runtime artwork in Git.
+# Runtime textures are required by this buildless site; do not ignore assets/.
+
+# Local Python environments and tooling caches (recreate on each machine).
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Disposable browser profiles and reproducible QA screenshots/reports.
+/.browser-profile/
+/output/qa/
+*.log
+
+# Private environment values and machine-specific tool/credential state.
+# Example environment templates stay shareable.
+.env
+.env.*
+!.env.example
+!.env.*.example
+/.aws/
+/.codex/
+
+# Editor recovery files and operating-system metadata.
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini

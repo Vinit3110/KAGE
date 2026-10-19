@@ -1,0 +1,80 @@
+[
+  {
+    "file": "assets/environments/crimson-horizon.webp",
+    "width": 1586,
+    "height": 992,
+    "bytes": 266046
+  },
+  {
+    "file": "assets/environments/crimson-horizon-small.webp",
+    "width": 959,
+    "height": 600,
+    "bytes": 125746
+  },
+  {
+    "file": "assets/environments/crimson-mobile.webp",
+    "width": 941,
+    "height": 1672,
+    "bytes": 259772
+  },
+  {
+    "file": "assets/environments/mountain-trail.webp",
+    "width": 1585,
+    "height": 992,
+    "bytes": 513836
+  },
+  {
+    "file": "assets/environments/mountain-trail-small.webp",
+    "width": 960,
+    "height": 601,
+    "bytes": 240894
+  },
+  {
+    "file": "assets/environments/night-dojo.webp",
+    "width": 1586,
+    "height": 992,
+    "bytes": 309978
+  },
+  {
+    "file": "assets/environments/night-dojo-small.webp",
+    "width": 959,
+    "height": 600,
+    "bytes": 137606
+  },
+  {
+    "file": "assets/environments/the-forge.webp",
+    "width": 1586,
+    "height": 992,
+    "bytes": 295788
+  },
+  {
+    "file": "assets/environments/the-forge-small.webp",
+    "width": 959,
+    "height": 600,
+    "bytes": 134432
+  },
+  {
+    "file": "assets/environments/the-archive.webp",
+    "width": 1586,
+    "height": 992,
+    "bytes": 266066
+  },
+  {
+    "file": "assets/environments/the-archive-small.webp",
+    "width": 959,
+    "height": 600,
+    "bytes": 124582
+  },
+  {
+    "file": "assets/environments/mastery.webp",
+    "width": 1586,
+    "height": 992,
+    "bytes": 142670
+  },
+  {
+    "file": "assets/environments/mastery-small.webp",
+    "width": 959,
+    "height": 600,
+    "bytes": 66552
+  }
+]

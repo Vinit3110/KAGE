@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080b10">
+  <meta name="description" content="KAGE is a cybersecurity dojo. Understand web vulnerabilities, practise safely, and learn to defend what matters.">
+  <title>KAGE — Cybersecurity Dojo</title>
+  <link rel="icon" href="assets/ui/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/cormorant-garamond-700.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/cormorant-garamond-500.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles/site.css">
+  <script src="scripts/scene.js" defer></script>
+  <script src="scripts/app.js" defer></script>
+</head>
+<body data-route="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-gate" viewBox="0 0 32 32"><path d="M3 7q13 4 26 0M5 12h22M9 9v20M23 9v20M6 28h6m8 0h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="5"/><path d="M16 1v7m0 16v7M1 16h7m16 0h7"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m7 6-6 6 6 6m10-12 6 6-6 6m-3-15-4 18"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 32 32"><path d="M5 27V17m7 10V11m7 16v-9m7 9V5M4 12l9-6 6 5 8-9"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m2 10 10-8 10 8M5 9v12h5v-7h4v7h5V9"/></symbol>
+    <symbol id="i-swords" viewBox="0 0 24 24"><path d="m3 3 5 1 12 13-3 3L4 8 3 3Zm18 0-5 1-5 6M7 14l-4 3 4 3 3-4M2 22l4-4m12 0 4 4"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5q-4-4-10-2v17q6-2 10 1 4-3 10-1V3q-6-2-10 2Zm0 0v16"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 9 4v6c0 5-9 10-9 10S3 17 3 12V6l9-4Zm0 4v12"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 4v4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L20 5"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M7 17H5a4 4 0 0 1-1-8 8 8 0 0 1 15-2 5 5 0 0 1 0 10h-2m-5 4V9m-4 4 4-4 4 4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 5h13M8 12h13M8 19h13M2 5h1M2 12h1M2 19h1"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 3C8 1 1 8 5 16s17 4 15-13ZM4 21 16 8"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="KAGE home"><span class="brand-mark" lang="ja" aria-hidden="true">影</span><span class="brand-word">KAGE</span></a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="#learn" data-nav="learn">Learn</a><a href="#practice" data-nav="practice">Practice</a><a href="#analyse" data-nav="analyse">Analyse</a><a href="#notes" data-nav="notes">Notes</a><button type="button" data-action="leaderboard">Leaderboard</button>
+    </nav>
+    <div class="header-tools">
+      <button class="icon-button search-toggle" type="button" data-action="search" aria-label="Search the dojo"><svg><use href="#i-search"/></svg></button>
+      <span class="header-divider" aria-hidden="true"></span>
+      <button class="sign-in" type="button" data-action="account">Sign in</button>
+      <a class="profile-link" href="#profile" aria-label="Your progress"><span lang="ja" aria-hidden="true">影</span></a>
+      <button class="icon-button menu-toggle" type="button" data-action="menu" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav"><svg><use href="#i-menu"/></svg></button>
+    </div>
+  </header>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>
+    <a href="#home">Home</a><a href="#learn">Learning Paths</a><a href="#practice">Cyber Arena</a><a href="#analyse">Code Analysis</a><a href="#notes">Field Notes</a><a href="#profile">Your progress</a>
+  </nav>
+  <aside class="sidebar" aria-label="Dojo navigation" hidden>
+    <nav>
+      <a href="#home"><svg><use href="#i-home"/></svg>Home</a>
+      <a href="#learn" data-nav="learn"><svg><use href="#i-gate"/></svg>Learning Paths</a>
+      <a href="#practice" data-nav="practice"><svg><use href="#i-swords"/></svg>Cyber Arena</a>
+      <a href="#analyse" data-nav="analyse"><svg><use href="#i-code"/></svg>Code Analysis</a>
+      <a href="#notes" data-nav="notes"><svg><use href="#i-book"/></svg>Field Notes</a>
+      <a href="#profile" data-nav="profile"><svg><use href="#i-user"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-quote"><span class="small-rule"></span><p>Discipline today,<br>a safer tomorrow.</p><span lang="ja">継続は力なり。</span><small>EVERY STEP FORWARD MATTERS</small></div>
+    <div class="sidebar-foot">KAGE <span>影</span> DOJO</div>
+  </aside>
+
+  <main id="main" tabindex="-1">
+    <section id="landing" class="landing" aria-labelledby="landing-title">
+      <picture class="hero-art" aria-hidden="true">
+        <source media="(max-width:620px)" srcset="assets/environments/crimson-mobile.webp">
+        <source media="(max-width:1000px)" srcset="assets/environments/crimson-horizon-small.webp">
+        <img src="assets/environments/crimson-horizon.webp" alt="" width="1586" height="992" fetchpriority="high" decoding="async">
+      </picture>
+      <canvas id="hero-scene" class="hero-scene" aria-hidden="true"></canvas>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <canvas id="atmosphere" aria-hidden="true"></canvas>
+      <div class="edge-ornament" aria-hidden="true"><i></i><b></b><b></b><b></b></div>
+      <div class="hero-copy">
+        <p class="eyebrow">// CYBERSECURITY DOJO <span></span></p>
+        <h1 id="landing-title"><span>Discipline</span><span class="silver">Secures</span><span class="crimson">Freedom.</span></h1>
+        <p class="hero-lede">Learn. Practice. Analyse. Grow.<br>Master the skills to defend what matters.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#learn">Begin your journey <svg><use href="#i-arrow"/></svg></a><a class="button button-secondary" href="#learn">Explore paths</a></div>
+      </div>
+      <div class="side-inscription left-inscription" aria-hidden="true"><span lang="ja">影の道</span><i></i><small>THE<br>SHADOW<br>PATH</small></div>
+      <div class="side-inscription right-inscription" aria-hidden="true"><span lang="ja">学び続ける</span><img src="assets/ui/seal.svg" alt="" width="36" height="40"></div>
+      <ul class="feature-strip" aria-label="Explore KAGE">
+        <li><svg><use href="#i-gate"/></svg><div><strong>3</strong><span>Core modules</span></div></li>
+        <li><svg><use href="#i-target"/></svg><div><strong>Guided</strong><span>Practice labs</span></div></li>
+        <li><svg><use href="#i-code"/></svg><div><strong>Code Analysis</strong><span>Coming next</span></div></li>
+        <li><svg><use href="#i-chart"/></svg><div><strong>Your progress</strong><span>Every step counts</span></div></li>
+      </ul>
+      <button class="motion-toggle" type="button" data-action="motion" aria-pressed="false" aria-label="Pause ambient motion"><span class="motion-indicator" aria-hidden="true"></span><span class="motion-label">PAUSE MOTION</span></button>
+    </section>
+    <div id="workspace" class="workspace" hidden></div>
+  </main>
+  <noscript><p class="noscript">Enable JavaScript to explore lessons, notes, and your learning progress.</p></noscript>
+  <dialog id="modal" aria-labelledby="modal-title"><div id="modal-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

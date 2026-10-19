@@ -1,0 +1,84 @@
+{
+  "reference": "assets/source/mockup-original.png",
+  "color_space": "sRGB",
+  "samples": {
+    "sky_dark": {
+      "point": [
+        1300,
+        10
+      ],
+      "hex": "#221118"
+    },
+    "sky_mid": {
+      "point": [
+        1350,
+        120
+      ],
+      "hex": "#4D1118"
+    },
+    "cloud_bright_red": {
+      "point": [
+        1190,
+        211
+      ],
+      "hex": "#D3161F",
+      "method": "median brightness among matching foreground pixels in the reference region"
+    },
+    "sun_core": {
+      "point": [
+        1150,
+        305
+      ],
+      "hex": "#FD3F2D"
+    },
+    "sun_edge": {
+      "point": [
+        1255,
+        300
+      ],
+      "hex": "#FD7650"
+    },
+    "headline_red": {
+      "point": [
+        356,
+        444
+      ],
+      "hex": "#E11C2A",
+      "method": "median brightness among matching foreground pixels in the reference region"
+    },
+    "cream_headline": {
+      "point": [
+        497,
+        260
+      ],
+      "hex": "#F5F4F5",
+      "method": "median brightness among matching foreground pixels in the reference region"
+    },
+    "button_red": {
+      "point": [
+        387,
+        649
+      ],
+      "hex": "#EC1525",
+      "method": "median brightness among matching foreground pixels in the reference region"
+    },
+    "foreground_dark": {
+      "point": [
+        30,
+        950
+      ],
+      "hex": "#010103"
+    }
+  },
+  "interface_tokens_from_design_document": {
+    "ink_950": "#080B10",
+    "ink_900": "#0D1219",
+    "ink_850": "#121A23",
+    "text_primary": "#F2EEE7",
+    "text_secondary": "#B8BDC5",
+    "red_500": "#F23845",
+    "red_600": "#D92736",
+    "teal_500": "#55C9B5",
+    "paper_100": "#F1E7D4"
+  }
+}
